@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Login and register page</h1>
+  <!-- Login and sign up box -->
+  <div id="login-signup-box">
+    <!-- Form Đăng nhập -->
+    <form action="/login" method="post">
+      <input type="email" name="email" placeholder="Email">
+      <input type="password" name="password" placeholder="Mật khẩu">
+      <button type="submit">Đăng nhập</button>
+    </form>
+
+    <!-- Form Đăng ký -->
+    <form action="/signup" method="post">
+      <input type="text" name="name" placeholder="Họ và tên">
+      <input type="email" name="email" placeholder="Email">
+      <input type="password" name="password" placeholder="Mật khẩu">
+      <button type="submit">Đăng ký</button>
+    </form>
+  </div>
+{% endblock content %}

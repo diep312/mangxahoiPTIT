@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Home Page</h1>
+<div>
+    <div>
+        {% for post in posts %}
+        <div>
+            <h5>
+                <a href='/profile/{{post.author_id}}'>{{post.author}}</a>: {{post.message}}
+            </h5>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
