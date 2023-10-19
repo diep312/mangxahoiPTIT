@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+
+{% content block %}
+<style>
+    .editprofile-container{
+    position: absolute; 
+    top: -150%;
+    left: 50%;
+    opacity: 0; 
+    transform: translate(-50%, -50%) scale(1.25);
+    transition: top 0ms ease-in-out 200ms, 
+                opacity 200ms ease-in-out 0ms,
+                transform 20ms ease-in-out 0ms;
+  }
+
+  .editprofile-container{
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: top 0ms ease-in-out 0ms, 
+                opacity 200ms ease-in-out 0ms,
+                transform 20ms ease-in-out 0ms;
+  }
+
+  .editbox{
+    max-width: 320px;
+    background-color: #FFE8A3;
+    border: 3px solid #C17D7D;
+    border-radius: 5px;
+    padding: 0px 30px; 
+  }
+  
+</style>
+
+<div class="editprofile-container">
+    <div class="editbox">
+        <a>x</a>
+        <form>
+            {% csrf_token %}
+            <input type="file">
+            <h1>Thông tin cá nhân</h1>
+            <textarea>
+            </textarea>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById("show-edit").addEventListener("click", function(){
+      document.querySelector(".editprofile-container").classList.add("active");
+    });
+  
+    document.getElementById("close-edit").addEventListener("click", function(){
+      document.querySelector(".editprofile-container").classList.remove("active"); 
+    });
+  </script>
+{% endblock content %}
