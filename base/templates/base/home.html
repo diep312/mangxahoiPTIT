@@ -1,16 +1,111 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>Home Page</h1>
-<div>
-    <div>
-        {% for post in posts %}
-        <div>
-            <h5>
-                <a href='/profile/{{post.author_id}}'>{{post.author}}</a>: {{post.message}}
-            </h5>
+<style>
+    .box_container{
+    min-width: 300px;
+    max-width: 400px;
+    min-height: 200px;
+    background-color: #FFE8A3;
+    border: 4px solid #C17D7D;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: top;
+    }
+
+    .box_container a{
+        display: block; 
+        font-size: 18px; 
+        text-align: left;
+
+    }
+
+    .box_container span{
+        padding-top: 10px;
+        display: block;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .box_container .info{
+        display: inline-block;
+        margin-left: 30px;
+        vertical-align: top;
+    }
+
+    .container{
+        padding: 40px 6%; 
+        display: flex;        
+        flex-wrap: wrap;
+        align-self: center;
+        justify-content: space-between;
+       
+    }
+
+    .leftColumn{
+       flex-basis: 50%;
+       align-self: flex-start; 
+    }
+
+    .rightColumn{
+        align-self: flex-start;
+        flex-basis: 30%;
+        position: sticky;
+        top: 30px;
+    }
+
+    .avt{
+        display: inline-block;
+        width: 50px; 
+        height: 50px;
+        border-radius: 50px;
+        object-fit: cover;
+    }
+
+    .search_bar{
+        display: flex;   
+        justify-content: space-between; 
+    }
+
+    .search_bar input{
+        flex-basis: 75%;
+        display: inline-block;
+        border-radius: 20px;
+    }
+
+    .search_bar button{
+        border-radius: 15px; 
+        font-weight: 600; 
+
+    }
+    
+</style>
+
+<div class="container">
+    
+    <div class="leftColumn">
+        <div class="search_bar"> 
+            <input>
+            <button> Tìm kiếm </button>
         </div>
-        {% endfor %}
+        <div style="padding-top: 30px"> 
+            {% include 'base/postcard.html'%}
+        </div>    
+    </diV>
+
+    <div class="rightColumn">
+        <div class="box_container">
+            <h1 style="padding-bottom: 20px;"> Gần bạn </h1>
+            <div>
+                <img class='avt' src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
+                <div class="info">
+                    <a href="#"> Nguyễn văn A </a>
+                    <span>Email</span>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
+
 {% endblock content %}

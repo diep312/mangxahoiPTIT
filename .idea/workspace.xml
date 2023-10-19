@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e638ba54-cdcd-4019-9cb1-e8ec4508ce18" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Website/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/base/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/socialmedia/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/socialmedia/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/socialmedia/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/socialmedia/socialmedia/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/socialmedia/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/socialmedia/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/templates/navbar.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Website/templates/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/templates/base/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2VpaO3p3iuuAsgjRE4F17tJmmp0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/Python_Projects"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e638ba54-cdcd-4019-9cb1-e8ec4508ce18" name="Changes" comment="" />
+      <created>1695535446593</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695535446593</updated>
+    </task>
+    <servers />
+  </component>
+</project>
