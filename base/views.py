@@ -61,14 +61,23 @@ def registerPage(request):
 @login_required(login_url='login')
 def home(request):
     posts = Post.objects.all().order_by('-created_on')
-    form = PostForm()
-    context = {
-        'post_list': posts,
-        'form': form,
-    }
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.author = request.user
+            new_post.save()
+        context = {
+            'post_list': posts,
+            'form': form,
+        }
 
+
+    else:
+        context = {
+            'post_list': posts,
+        }
     return render(request, 'base/home.html', context)
-
 
 @login_required(login_url='login')
 def friendspage(request, pk):
@@ -89,6 +98,7 @@ def editprofile(request, pk):
     }
     return render(request, 'base/profile.html', context)
     
+
 
 class PostDetailView(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
@@ -161,25 +171,25 @@ class AddLike(LoginRequiredMixin, View):
         data = json.loads(request.body)
         id = data['id']
         post = Post.objects.get(pk=pk)
-        
-        is_dislike = False 
-        
+
+        is_dislike = False
+
         if post.dislikes.filter(id=request.user.id).exists():
-            is_dislike = True 
+            is_dislike = True
         if is_dislike:
             post.dislikes.remove(request.user)
 
         is_like = False
 
         if post.likes.fitler(id=request.user.id).exist():
-            is_like = True 
+            is_like = True
 
         if not is_like:
             post.likes.add(request.user)
 
         if is_like:
             post.likes.remove(request.user)
-        
+
         likes = post.likes.count()
         dislikes = post.dislikes.count()
 

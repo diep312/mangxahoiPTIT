@@ -133,7 +133,7 @@
             <div class="custom_input">
             <form method="POST"> 
                 {% csrf_token %}
-                <textarea></textarea>
+                {{form.as_p}}
                 <button type="submit"> Đăng! </button>
             </form>
             </div>

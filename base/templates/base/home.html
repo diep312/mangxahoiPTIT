@@ -147,13 +147,15 @@
 
 <div class="dropdown-menu-wrap" id="profileMenu">
     <div class="dropdown-menu">
+        <form method="POST">
+            {% csrf_token %}
 
-        <div class="caption-area">
-            <h2>Caption</h2>
-            <textarea></textarea>
-        </div>
-
-        <button style="position: relative; left: 30%;">Đăng bài</button>
+            <div class="caption-area">
+                <h2>Caption</h2>
+            </div>
+            {{ form.body }}
+        <button type="submit"> Đăng </button>
+        </form>
     </div>
 </div>
 
