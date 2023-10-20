@@ -22,7 +22,6 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, blank = True, related_name = 'likes')
     dislikes = models.ManyToManyField(User, blank = True, related_name = 'dislikes')
 
-
 class Comment(models.Model):
     comment = models.TextField()
     created_on = models.DateTimeField(default = timezone.now)

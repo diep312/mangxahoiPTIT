@@ -168,21 +168,23 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class AddLike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
-        data = json.loads(request.body)
-        id = data['id']
-        post = Post.objects.get(pk=pk)
 
         is_dislike = False
 
-        if post.dislikes.filter(id=request.user.id).exists():
-            is_dislike = True
+        for dislike in post.dislikes.all():
+            if dislike == request.user:
+                is_dislike = True
+                break
+
         if is_dislike:
             post.dislikes.remove(request.user)
 
         is_like = False
 
-        if post.likes.fitler(id=request.user.id).exist():
-            is_like = True
+        for like in post.likes.all():
+            if like == request.user:
+                is_like = True
+                break
 
         if not is_like:
             post.likes.add(request.user)
@@ -190,22 +192,11 @@ class AddLike(LoginRequiredMixin, View):
         if is_like:
             post.likes.remove(request.user)
 
-        likes = post.likes.count()
-        dislikes = post.dislikes.count()
-
-        info = {
-            'likes': likes,
-            'dislikes': dislikes
-        }
-
-        return JsonResponse(info, safe=False)
-
+        next = request.POST.get('next', '/')
+        return HttpResponseRedirect(next)
 
 class AddDislike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
-        post = Post.objects.get(pk=pk)
-        data = json.loads(request.body)
-        id = data['id']
         post = Post.objects.get(pk=pk)
 
         is_like = False
@@ -232,4 +223,4 @@ class AddDislike(LoginRequiredMixin, View):
             post.dislikes.remove(request.user)
 
         next = request.POST.get('next', '/')
-        return HttpResponse(info)
+        return HttpResponseRedirect(next)

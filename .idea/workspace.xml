@@ -7,6 +7,8 @@
     <list default="true" id="e638ba54-cdcd-4019-9cb1-e8ec4508ce18" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/base/templates/base/post_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/templates/base/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/templates/base/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/post_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/views.py" afterDir="false" />
@@ -63,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1695535446593</updated>
-      <workItem from="1697789547771" duration="4524000" />
+      <workItem from="1697789547771" duration="7405000" />
     </task>
     <servers />
   </component>
