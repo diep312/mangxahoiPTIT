@@ -90,13 +90,13 @@
                 <h3 class="text">Trang cá nhân</h3>
             </a>    
         </li>
-        
+        {% if page == 'home' %}
         <li class="li">
             <a onclick="toggleMenu()">
                 <h3 class="text"> Đăng bài  </h3>
             </a>
         </li>
-
+        {% endif %}
         <li class="li">
             <a href="{% url 'logout' %}">
                 <h3 class="text">Đăng xuất</h3>

@@ -78,6 +78,39 @@
         font-weight: 600; 
 
     }
+
+    .dropdown-menu-wrap{
+        position: absolute;
+        top: 15%;
+        right: 50%; 
+        width: 320px; 
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out; 
+    }
+
+    .dropdown-menu-wrap.open-menu{
+        max-height: 400px; 
+    }
+    
+    .dropdown-menu{
+        background: #FFE8A3; 
+        padding: 20px; 
+        border-radius: 5px;
+        border: 3px solid rgba(0, 0, 0, 0.25);
+        
+    }
+
+    .dropdown-menu .upload-images button{
+       position: relative;
+       left: 30%;
+    }
+
+    .dropdown-menu .caption-area textarea{
+        width: 100%;
+        border-radius: 10px;
+        height: 150px;
+    }
     
 </style>
 
@@ -85,27 +118,51 @@
     
     <div class="leftColumn">
         <div class="search_bar"> 
-            <input>
-            <button> Tìm kiếm </button>
+            <a onclick="toggleMenu()">
+                <h3 class="text"> Đăng bài  </h3>
+            </a>
         </div>
+
         <div style="padding-top: 30px"> 
             {% include 'base/postcard.html'%}
         </div>    
     </diV>
 
     <div class="rightColumn">
+       
         <div class="box_container">
             <h1 style="padding-bottom: 20px;"> Gần bạn </h1>
+            {% for post in post_list %}
             <div>
                 <img class='avt' src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png">
                 <div class="info">
-                    <a href="#"> Nguyễn văn A </a>
-                    <span>Email</span>
+                    <a href="{% url 'profile' post.author.pk %}"> {{ post.author.userName }} </a>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 
 </div>
 
+<div class="dropdown-menu-wrap" id="profileMenu">
+    <div class="dropdown-menu">
+
+        <div class="caption-area">
+            <h2>Caption</h2>
+            <textarea></textarea>
+        </div>
+
+        <button style="position: relative; left: 30%;">Đăng bài</button>
+    </div>
+</div>
+
+<script>
+    let profileMenu = document.getElementById("profileMenu");
+
+    function toggleMenu(){
+        profileMenu.classList.toggle("open-menu");
+    }
+
+</script>
 {% endblock content %}
