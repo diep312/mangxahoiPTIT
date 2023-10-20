@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, Comment, User
+from .models import Post, Comment, User, UserAdditionalInfo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages 
@@ -73,20 +73,41 @@ def home(request):
 @login_required(login_url='login')
 def friendspage(request, pk):
     user = User.objects.get(id=pk)
+    user_info = UserAdditionalInfo.objects.get(user_id=pk)
+    posts = Post.objects.filter(author=pk)
     page = 'see-profile'
-    context = {'user': user}
+    context = {
+        'user': user,
+        'user_info': user_info,
+        'post_list': posts,
+        'page': page,
+    }
     return render(request, 'base/profile.html', context)
 
 @login_required(login_url='login')
 def editprofile(request, pk):
     cur_user = User.objects.get(id=pk)
     page = 'edit'
-    form = UpdateUserForm()
+    form = UpdateUserForm(request.POST, request.FILES)
+    
+    if request.method == 'POST':
+        if form.is_valid():
+            newinfo = form.save(commit=False)
+            newinfo.user = cur_user
+            if(newinfo.bg == None):
+                newinfo.bg = "https://t3.ftcdn.net/jpg/04/53/92/04/360_F_453920448_yMcff4E8ctdXQQegdaQ7WcXnHM3y3aMM.jpg"
+            if(newinfo.avt == None):
+                newinfo.avt = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+            newinfo.save()
+            messages.success(request, 'Cập nhật thành công')
+            return redirect('profile')
+
     context ={
         'user': cur_user,
         'page': page,
         'form': form
     }
+    
     return render(request, 'base/profile.html', context)
     
 
