@@ -4,6 +4,14 @@
 {% block content %}
 
 <style>
+  .bg-container{
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0,0,0,0.7); 
+    position: absolute; 
+    top: 0;
+  }
+
   .DecorationContainer{
     width: 60%; 
     height: 100%;
@@ -21,6 +29,7 @@
  
 
   .LoginContainer{
+
     padding-top: 50px;
     display: flex;
     width: 40%;
@@ -102,35 +111,61 @@
             <form action="" method="POST">
               {% csrf_token %}
               <div class="FormField">
-                <label>Username</label>
-                <input type="text" required name="username" placeholder="Hãy nhập tài khoản...">
+                <label>Tên đăng nhập</label>
+                <input type="text" required name="username" placeholder="Hãy nhập tên đăng nhập...">
               </div>
               <div class="FormField">
                 <label>Mật khẩu</label>
                 <input type="password" required name="password" placeholder="Hãy nhập mật khẩu...">
               </div>    
-              <p class="additionalInfo">Chưa có tài khoản? <a href="{% url 'register' %}" id="show-login">Đăng ký ngay!</a></p>
+              <p class="additionalInfo">Chưa có tài khoản? <a href="{% url 'register' %}" id="show-login" style="color: blue">Đăng ký ngay!</a></p>
               <div style="display: flex; justify-content: center; padding: 20px 40px">
                 <button type="submit">Đăng nhập</button>
               </div>
             </form> 
-            
         </div>
     </div>
 
     {% if page != 'login' %}
-    <div class="RegisterContainer">
-      <div class="LoginBox">
-        <h1>Đăng ký</h1>
-        <!-- Form Đăng ký -->
-        <form action="" method="POST">
-          {% csrf_token %}
-            {{form.as_p}}
-            <p class="additionalInfo">Đã có tài khoản? <a href="{% url 'login' %}">Đăng nhập ngay!</a></p>
-            <div style="display: flex; justify-content: center; padding: 20px 40px">
-              <button type="submit">Đăng ký</button>
-            </div>
-        </form>
+    <div class ="bg-container">
+      <div class="RegisterContainer">
+        <div class="LoginBox">
+          <h1>Đăng ký</h1>
+          <!-- Form Đăng ký -->
+          <form action="" method="POST">
+              {% csrf_token %}
+              <div class="FormField">
+                <label>Tên đăng nhập</label>
+                {{form.username}}
+              </div>
+  
+              <div class="FormField">
+                <label>Email</label>
+                {{form.email}}
+              </div>
+  
+              <div class="FormField">
+                <label>Mật khẩu</label>
+                {{form.password1}}
+              </div>
+  
+              <div class="FormField">
+                <label>Nhập lại mật khẩu</label>
+                {{form.password2}}
+              </div>
+              <ul style="display: inline-block; padding-left: 5px;">
+                <li style="font-size: 8px; font-weight: 300;"> Mật khẩu không nên đặt quá gần với thông tin đăng nhập của bạn. </li>
+                <li style="font-size: 8px; font-weight: 300;"> Mật khẩu phải chứa ít nhất 8 ký tự. </li>
+                <li style="font-size: 8px; font-weight: 300;"> Mật khẩu của bạn không nên là những mật khẩu thường sử dụng.</li>
+                <li style="font-size: 8px; font-weight: 300;"> Mật khẩu không được phép chỉ chứa toàn ký tự chữ số.</li>
+              </ul>
+              <p class="additionalInfo">Đã có tài khoản? <a href="{% url 'login' %}" style="color: blue;">Đăng nhập ngay!</a></p>
+
+              <div style="display: flex;">               
+                <button style="margin: auto" type="submit">Đăng ký</button>       
+              </div>
+          </form>
+        </div>
       </div>
     </div>
     {% endif %}

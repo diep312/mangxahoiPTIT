@@ -3,9 +3,8 @@ from django.http import HttpResponse
 from .models import Post, Comment, User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages 
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, CreateUserForm, UpdateUserForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views.generic.edit import UpdateView, DeleteView
@@ -21,7 +20,7 @@ def loginPage(request):
         return redirect('home')
 
     if request.method == 'POST':
-        username = request.POST.get('username').lower()
+        username = request.POST.get('username').lower() 
         password = request.POST.get('password')
 
         try:
@@ -39,15 +38,15 @@ def loginPage(request):
     context = {'page': page}
     return render(request, 'base/loginandregister.html', context)
              
-  
+@login_required(login_url='login')  
 def logoutUser(request):
     logout(request)
     return redirect('home')
 
 def registerPage(request):
-    form = UserCreationForm()
+    form = CreateUserForm()
     if request.method == 'POST': 
-        form = UserCreationForm(request.POST)
+        form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -74,9 +73,22 @@ def home(request):
 @login_required(login_url='login')
 def friendspage(request, pk):
     user = User.objects.get(id=pk)
+    page = 'see-profile'
     context = {'user': user}
     return render(request, 'base/profile.html', context)
 
+@login_required(login_url='login')
+def editprofile(request, pk):
+    cur_user = User.objects.get(id=pk)
+    page = 'edit'
+    form = UpdateUserForm()
+    context ={
+        'user': cur_user,
+        'page': page,
+        'form': form
+    }
+    return render(request, 'base/profile.html', context)
+    
 
 class PostDetailView(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
@@ -210,4 +222,4 @@ class AddDislike(LoginRequiredMixin, View):
             post.dislikes.remove(request.user)
 
         next = request.POST.get('next', '/')
-        return JsonResponse(info, safe=False)
+        return HttpResponse(info)

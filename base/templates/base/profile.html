@@ -44,6 +44,26 @@
         border-radius: 50%
     }
 
+    .editprofile-container{
+        width: 100%;
+        height: 100%; 
+        background-color: rgba(0,0,0,0.7); 
+        position: absolute; 
+        top: 0;
+        display: flex; 
+        justify-items: center;
+        align-items: center;
+    }
+
+    .editbox{
+        margin: auto;
+        max-width: 400px;
+        background-color: #FFE8A3;
+        border: 3px solid #C17D7D;
+        border-radius: 5px;
+        padding: 10px 30px; 
+    }
+
 </style>
 <!-- Avt, cover và tên -->
 <div>
@@ -55,12 +75,12 @@
     
     <div style='display: inline-block; padding-left: 20px; justify-content: space-around;'>
         <h1>
-            {{ user.userName }}
+            {{ user.username }}
         </h1>
 
-        {% if request.user.username == user.userName %}
-        <a>
-            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+        {% if request.user.username == user.username %}
+        <a href="{% url 'edit' user.pk %}">
+            <svg style=" width: 25px; height: 25px;" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
                 <path d="M20.1426 7.04053H6.80947C5.79914 7.04053 4.83018 7.44188 4.11577 8.1563C3.40135 8.87071 3 9.83967 3 10.85V37.5163C3 38.5267 3.40135 39.4956 4.11577 40.21C4.83018 40.9244 5.79914 41.3258 6.80947 41.3258H33.4758C34.4861 41.3258 35.4551 40.9244 36.1695 40.21C36.8839 39.4956 37.2853 38.5267 37.2853 37.5163V24.1832" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M34.4282 4.18345C35.1859 3.4257 36.2136 3 37.2853 3C38.3569 3 39.3846 3.4257 40.1424 4.18345C40.9001 4.9412 41.3258 5.96893 41.3258 7.04056C41.3258 8.11218 40.9001 9.13991 40.1424 9.89766L22.0474 27.9927L14.4284 29.8974L16.3332 22.2785L34.4282 4.18345Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -68,6 +88,41 @@
         {% endif %}
     </div>
 </div>
+
+{% if page == 'edit' %}
+<div class="editprofile-container">
+    <div class="editbox">
+        <a style="display: flex; float: right"; href="{% url 'profile' user.pk %}">x</a>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3> Ảnh đại diện </h3>
+            {{form.avt}}
+            <h3> Ảnh bìa </h3>
+            {{form.bg}}
+            <h2>Thông tin cá nhân</h2>
+            <div style="justify-content: space-between;">
+                <div>
+                    <label> Giới tính </label>
+                    {{form.gender}}
+                </div>
+                <div>
+                    <label> Ngày tháng năm sinh </label>
+                    {{form.dob}}
+                </div>
+                <div>
+                    <label> Địa điểm </label>
+                    {{form.location}}
+                </div>
+                <div>
+                    <label> Giới thiệu bản thân </label>
+                    {{form.description}}
+                </div>
+            </div>
+            <button type="submit"> Cập nhật </button>
+        </form>
+    </div>
+</div>
+{% endif %}
 
 <div style='display: grid; grid-template-columns: 3fr 1fr; width: 90%;'>
       <!-- Bài đăng của người dùng -->
