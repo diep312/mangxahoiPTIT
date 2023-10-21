@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e638ba54-cdcd-4019-9cb1-e8ec4508ce18" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/base/templates/base/post_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/templates/base/comment_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/comment_delete.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/templates/base/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/templates/base/post_delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/post_delete.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/templates/base/post_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/post_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/templates/base/post_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/post_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/templates/base/post_list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/templates/base/postcard.html" beforeDir="false" afterPath="$PROJECT_DIR$/base/templates/base/postcard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/base/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navbar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,9 +39,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2VpaO3p3iuuAsgjRE4F17tJmmp0" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -47,8 +53,9 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Pham__Tien",
     "last_opened_file_path": "D:/PY/mangxahoiPTIT",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -65,7 +72,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1695535446593</updated>
-      <workItem from="1697789547771" duration="7405000" />
+      <workItem from="1697789547771" duration="10404000" />
+      <workItem from="1697809901930" duration="6370000" />
+      <workItem from="1697848481360" duration="1637000" />
+      <workItem from="1697850222256" duration="27000" />
+      <workItem from="1697873875939" duration="1031000" />
     </task>
     <servers />
   </component>

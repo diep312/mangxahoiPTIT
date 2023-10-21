@@ -10,7 +10,7 @@ class PostForm(forms.ModelForm):
         label = '',
         widget = forms.Textarea(attrs={
             'rows':'3',
-            'placeholder': 'Say something...',
+            'placeholder': 'Bạn đang nghĩ gì thế?...',
             'type': 'text'
         })
     )
@@ -34,7 +34,7 @@ class CommentForm(forms.ModelForm):
         label = '',
         widget = forms.Textarea(attrs={
             'rows':'3',
-            'placeholder': 'Say something...'
+            'placeholder': 'Viết bình luận...'
         })
     )
     class Meta:

@@ -71,8 +71,6 @@ def home(request):
             'post_list': posts,
             'form': form,
         }
-
-
     else:
         context = {
             'post_list': posts,
@@ -148,8 +146,8 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    template_name = 'social/post_delete.html'
-    success_url = reverse_lazy('post-list')
+    template_name = 'base/post_delete.html'
+    success_url = reverse_lazy('home')
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author

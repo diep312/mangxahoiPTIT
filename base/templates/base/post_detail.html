@@ -8,7 +8,7 @@
         margin-top: 50px;
     }
 
-    .container .box{ 
+    .container .box{
         padding: 15px 25px 5px;
         background: #FFE8A3;
         border-radius: 14px;
@@ -39,7 +39,7 @@
 
     .custom_input{
         display: flex;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
         font-size: 12px;
         justify-content: space-between;
     }
@@ -58,7 +58,7 @@
         width: 25px;
         height: 25px;
         background: transparent;
-        border: none; 
+        border: none;
     }
 
     .like_button:active{
@@ -77,21 +77,34 @@
         display: flex;
         justify-content: left;
     }
+    .row-comment{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 15px;
+        margin-bottom: 25px;
+        border-bottom: 1px solid #dee2e6;
+    }
 
 </style>
 
 <div class="container">
-        
+
     <div class="box">
         <!-- Infomation -->
         <div class="header">
-            <p style="flex-wrap: wrap;"> <a href="{% url 'profile' post.author.pk %}">{{post.author.userName}}</a> <span style="padding-left: 30px; color: grey;"> {{ post.created_on }} </span> </p>
-            {% if request.user == post.author %}
-            <div>
-                <a href="{% url 'post-edit' post.pk %}" style="color: #333;"></a>
-                <a href="{% url 'post-delete' post.pk %}" style="color: #333;"></a>
-            </div>
-            {% endif %}
+            <p style="flex-wrap: wrap;">
+                <a href="{% url 'profile' post.author.pk %}">
+                    {{post.author.username}}
+                </a>
+                <span style="padding-left: 30px; color: grey;">
+                    {{ post.created_on }}
+                </span>
+                {% if request.user == post.author %}
+                    <a href="{% url 'post-edit' post.pk %}" style="color: #333;"><i class="far fa-edit"></i></a>
+                    <a href="{% url 'post-delete' post.pk %}" style="color: #333;"><i class="fa-sharp fa-solid fa-trash"></i></a>
+                {% endif %}
+            </p>
+
         </div>
 
         <!-- Content -->
@@ -99,7 +112,7 @@
             {{post.body}}
         </div>
 
-        
+
         <!-- Comment and Like -->
         <div class="commentandbutton">
             <div class="stats">
@@ -113,8 +126,8 @@
                     </button>
                     <span> {{ post.likes.all.count }} </span>
                 </form>
-        
-                
+
+
                 <form method="POST" action="{% url 'dislike' post.pk %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
@@ -131,23 +144,26 @@
             </div>
 
             <div class="custom_input">
-            <form method="POST"> 
+            <form method="POST">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit"> Đăng! </button>
+                {{form.comment}}
+                <button type="submit" style="font-size: 16px; cursor: pointer;"> Đăng! </button>
             </form>
             </div>
         </div>
-        
-        <br> 
+
+        <br>
         <div>
             {% for comment in comments %}
-            <div class="row justify-content-center mt-3 mb-5 border-bottom">
-                <div class="col-md-5 col-sm-12">
+            <div class="row-comment">
+                <div>
                     <p>
-                        <strong>{{ comment.author }}</strong> {{ comment.created_on }}
+                        <strong>
+                            {{ comment.author }}
+                        </strong>
+                        {{ comment.created_on }}
                         {% if request.user == comment.author %}
-                        <a href="{% url 'comment-delete' post.pk comment.pk %}" style="color: #333;"></a>
+                            <a href="{% url 'comment-delete' post.pk comment.pk%}" style="color: #333;"><i class="fa-sharp fa-solid fa-trash"></i></a>
                         {% endif %}
                     </p>
                     <p>{{ comment.comment }}</p>

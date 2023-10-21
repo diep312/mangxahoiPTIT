@@ -1,5 +1,5 @@
 <style>
-    .container .box{ 
+    .container .box{
         padding: 15px 25px 5px;
         background: #FFE8A3;
         border-radius: 14px;
@@ -30,7 +30,7 @@
 
     .custom_input{
         display: flex;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
         font-size: 12px;
         justify-content: space-between;
     }
@@ -49,7 +49,7 @@
         width: 25px;
         height: 25px;
         background: transparent;
-        border: none; 
+        border: none;
     }
 
     .like_button:active{
@@ -73,7 +73,7 @@
 
 {% for post in post_list %}
 <div class="box">
-    
+
     <!-- Infomation -->
     <div class="header">
         <p style="flex-wrap: wrap;"> <a href="{% url 'profile' post.author.pk %}">{{post.author.username}}</a> <span style="padding-left: 30px; color: grey;"> {{ post.created_on }} </span> </p>
@@ -84,7 +84,7 @@
         {{post.body}}
     </div>
 
-    
+
     <!-- Comment and Like -->
     <div class="commentandbutton">
         <div class="stats">
@@ -98,7 +98,7 @@
                 </button>
                 <span>{{ post.like.all.count }}</span>
             </form>
-                    
+
             <form method="POST" action="{% url 'dislike' post.pk %}">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
