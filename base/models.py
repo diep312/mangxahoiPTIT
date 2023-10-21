@@ -15,6 +15,7 @@ class UserAdditionalInfo(models.Model):
 
 class Post(models.Model):
     body = models.TextField()
+    img = models.ImageField(null=True, blank=True, upload_to='images/') 
     created_on = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     likes = models.ManyToManyField(User, blank = True, related_name = 'likes')

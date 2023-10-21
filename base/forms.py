@@ -10,12 +10,13 @@ class PostForm(forms.ModelForm):
         label = '',
         widget = forms.Textarea(attrs={
             'rows':'3',
-            'placeholder': 'Say something...'
+            'placeholder': 'Say something...',
+            'type': 'text'
         })
     )
     class Meta:
         model = Post
-        fields = ['body']
+        fields = ['body', 'img']
 
 class CreateUserForm(UserCreationForm):
     class Meta: 
@@ -27,18 +28,6 @@ class CreateUserForm(UserCreationForm):
             'password1': forms.TextInput(attrs = {'placeholder': 'Nhập mật khẩu...'}),
             'password2': forms.TextInput(attrs = {'placeholder': 'Nhập lại mật khẩu...'})
         }
-
-class CommentForm(forms.ModelForm):
-    comment = forms.CharField(
-        label = '',
-        widget = forms.Textarea(attrs={
-            'rows':'3',
-            'placeholder': 'Say something...'
-        })
-    )
-    class Meta:
-        model = Comment
-        fields = ['comment']
 
 
 class UpdateUserForm(forms.ModelForm):

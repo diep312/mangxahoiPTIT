@@ -11,7 +11,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('profile/<str:pk>', views.friendspage, name='profile'),
     path('profile/<str:pk>/edit', views.editprofile, name='edit'),
-   
+    
+    path('uploadpost', views.postPost, name='uploadpost'),
     path('post/<int:pk>', PostDetailView.as_view(), name = 'post-detail'),
     path('post/edit/<int:pk>/', PostEditView.as_view(), name='post-edit'),
     path('post/delete/<int:pk>', PostDeleteView.as_view(), name = 'post-delete'),

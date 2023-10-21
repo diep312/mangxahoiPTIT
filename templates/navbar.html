@@ -2,9 +2,10 @@
 <style>
     header{ 
         display: flex;
+        position: sticky;
         justify-content: space-between;
         background: #F0B724;
-        align-items: center;
+        align-items: start;
         border-bottom: 4px solid #C17D7D;
     }
     
@@ -72,6 +73,8 @@
         border-radius: 10px;
         height: 150px;
     }
+
+
 </style>
 
 {% load static %}
@@ -90,13 +93,13 @@
                 <h3 class="text">Trang cá nhân</h3>
             </a>    
         </li>
-        {% if page == 'home' %}
+
         <li class="li">
-            <a onclick="toggleMenu()">
+            <a href="{% url 'uploadpost' %}">
                 <h3 class="text"> Đăng bài  </h3>
             </a>
         </li>
-        {% endif %}
+     
         <li class="li">
             <a href="{% url 'logout' %}">
                 <h3 class="text">Đăng xuất</h3>
@@ -109,29 +112,8 @@
         <h2>Connect-u</h2>
     </div>
 
-    <div class="dropdown-menu-wrap" id="profileMenu">
-        <div class="dropdown-menu">
-            <div class="upload-images">
-                <button>Upload</button>
-                <p style="font-size: 12px; color: grey; text-align: center;">Giới hạn ảnh 999MB</p>
-            </div>
-    
-            <div class="caption-area">
-                <h2>Caption</h2>
-                <textarea></textarea>
-            </div>
-    
-            <button style="position: relative; left: 30%;">Đăng bài</button>
-        </div>
-    </div>
+   
 </header>
 
-<script>
-    let profileMenu = document.getElementById("profileMenu");
 
-    function toggleMenu(){
-        profileMenu.classList.toggle("open-menu");
-    }
-
-</script>
 

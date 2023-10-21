@@ -4,13 +4,14 @@ from .models import Post, Comment, User, UserAdditionalInfo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages 
-from .forms import PostForm, CommentForm, CreateUserForm, UpdateUserForm
+from .forms import PostForm, CreateUserForm, UpdateUserForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views import View
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+
 
 # Hàm view cho trang web
 @csrf_protect
@@ -61,14 +62,39 @@ def registerPage(request):
 @login_required(login_url='login')
 def home(request):
     posts = Post.objects.all().order_by('-created_on')
-    form = PostForm()
+    user = User.objects.all().order_by('?')[:3]
+    page = 'not-edit'
     context = {
         'post_list': posts,
-        'form': form,
+        'page': page,
+        'user_info': user,
     }
-
     return render(request, 'base/home.html', context)
 
+@login_required(login_url='login')
+def postPost(request):
+    posts = Post.objects.all().order_by('-created_on')
+    page = 'post'
+    form = PostForm()
+    
+    context ={
+        'page': page,
+        'form': form,
+        'post_list': posts
+    }
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_post = form.save(commit=False)
+            new_post.author = request.user
+            new_post.save()
+            return redirect('home')
+        else:
+            messages.error(request, 'Đã có lỗi xảy ra...')
+        
+    return render(request, 'base/home.html', context)
+        
 
 @login_required(login_url='login')
 def friendspage(request, pk):
@@ -114,33 +140,27 @@ def editprofile(request, pk):
 class PostDetailView(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
-        form = CommentForm()
-
         comments = Comment.objects.filter(post=post).order_by('-created_on')
 
         context = {
             'post': post,
-            'form': form,
-            'comments': comments,
+            'comments': comments
         }
         return render(request, 'base/post_detail.html', context)
 
     def post(self, request, pk, *args, **kwargs):
         if request.method == 'POST':
             post = Post.objects.get(pk=pk)
-            form = CommentForm(request.POST)
+            new_comment = Comment.objects.create(
+                post=post,
+                author=request.user,
+                comment=request.POST.get('comment')
+            )
 
-            if form.is_valid():
-                new_comment = form.save(commit=False)
-                new_comment.author = request.user
-                new_comment.post = post
-                new_comment.save()
-            
             comments = Comment.objects.filter(post=post).order_by('-created_on')
 
             context = {
                 'post': post,
-                'form': form,
                 'comments': comments,
             }
             return render(request, 'base/post_detail.html', context)
@@ -179,68 +199,55 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class AddLike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
-        data = json.loads(request.body)
-        id = data['id']
-        post = Post.objects.get(pk=pk)
         
-        is_dislike = False 
-        
-        if post.dislikes.filter(id=request.user.id).exists():
-            is_dislike = True 
-        if is_dislike:
-            post.dislikes.remove(request.user)
-
-        is_like = False
-
-        if post.likes.fitler(id=request.user.id).exist():
-            is_like = True 
-
-        if not is_like:
-            post.likes.add(request.user)
-
-        if is_like:
-            post.likes.remove(request.user)
-        
-        likes = post.likes.count()
-        dislikes = post.dislikes.count()
-
-        info = {
-            'likes': likes,
-            'dislikes': dislikes
-        }
-
-        return JsonResponse(info, safe=False)
-
-
-class AddDislike(LoginRequiredMixin, View):
-    def post(self, request, pk, *args, **kwargs):
-        post = Post.objects.get(pk=pk)
-        data = json.loads(request.body)
-        id = data['id']
-        post = Post.objects.get(pk=pk)
-
-        is_like = False
-
-        for like in post.likes.all():
-            if like == request.user:
-                is_like = True
-                break
-
-        if is_like:
-            post.likes.remove(request.user)
-
         is_dislike = False
 
         for dislike in post.dislikes.all():
             if dislike == request.user:
                 is_dislike = True
                 break
+        
+        if is_dislike:
+            post.dislikes.remove(request.user)
 
+        is_like = False
+        
+        for like in post.likes.all():
+            if like == request.user:
+                is_like = True
+                break
+        
+        if not is_like:
+            post.likes.add(request.user)
+
+        if is_like:
+            post.likes.remove(request.user)
+
+        next = request.POST.get('next', '/')
+        return HttpResponseRedirect(next)
+
+
+class AddDislike(LoginRequiredMixin, View):
+    def post(self, request, pk, *args, **kwargs):
+        post = Post.objects.get(pk=pk)
+        
+        is_like = False
+
+        for like in post.likes.all():
+            if like == request.user:
+                is_like = True
+                break
+        if is_like:
+            post.likes.remove(request.user)
+        is_dislike = False
+        for dislike in post.dislikes.all():
+            if dislike == request.user:
+                is_dislike = True
+                break
         if not is_dislike:
             post.dislikes.add(request.user)
-
         if is_dislike:
             post.dislikes.remove(request.user)
 
         next = request.POST.get('next', '/')
-        return HttpResponse(info)
+        return HttpResponseRedirect(next)
