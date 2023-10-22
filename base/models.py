@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class UserAdditionalInfo(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, primary_key=True)
-    avt = models.ImageField(null=True, blank=True, default="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png", upload_to='images/')
-    bg = models.ImageField(null=True, blank=True, default="https://t3.ftcdn.net/jpg/04/53/92/04/360_F_453920448_yMcff4E8ctdXQQegdaQ7WcXnHM3y3aMM.jpg", upload_to='images/')
+    avt = models.ImageField(null=True, blank=True, upload_to='images/')
+    bg = models.ImageField(null=True, blank=True, upload_to='images/')
     dob = models.DateTimeField(null=True, blank=True)
     gender = models.CharField(null=True, max_length=10, blank=True, default="None")
     location = models.CharField(null=True, max_length=255, blank=True)

@@ -78,15 +78,17 @@
 
     <!-- Content -->
     <div class="content">
-        {{post.body}}
+        {{post.body}} 
     </div>
+    <br> 
     <div>
         {% if post.img %}
         <img src="{{post.img.url}}" style="width: 90%; margin: 3% 6%; border-radius: 20px;">
         {% endif %}
     </div>
 
-    
+    <hr> 
+
     <!-- Comment and Like -->
     <div class="commentandbutton">
         <div class="stats">
@@ -94,9 +96,17 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
                 <button class="like_button">
+                    
+                    {% if request.user in post.likes.all %}
+                    <svg class = "like_icon" xmlns="http://www.w3.org/2000/svg" width="48" height="44" viewBox="0 0 48 44" fill="red">
+                        <path d="M41.5228 6.37278C40.5029 5.30351 39.2919 4.45529 37.9591 3.87658C36.6262 3.29786 35.1976 3 33.7549 3C32.3121 3 30.8835 3.29786 29.5507 3.87658C28.2178 4.45529 27.0069 5.30351 25.9869 6.37278L23.8702 8.59085L21.7535 6.37278C19.6933 4.21394 16.8991 3.00112 13.9855 3.00112C11.072 3.00112 8.27778 4.21394 6.21759 6.37278C4.1574 8.53162 3 11.4596 3 14.5127C3 17.5657 4.1574 20.4938 6.21759 22.6526L8.33431 24.8707L23.8702 41.1505L39.4061 24.8707L41.5228 22.6526C42.5432 21.5838 43.3527 20.3149 43.905 18.9182C44.4572 17.5215 44.7415 16.0245 44.7415 14.5127C44.7415 13.0009 44.4572 11.5039 43.905 10.1072C43.3527 8.71051 42.5432 7.44155 41.5228 6.37278Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {% else %}
                     <svg class = "like_icon" xmlns="http://www.w3.org/2000/svg" width="48" height="44" viewBox="0 0 48 44" fill="none">
                         <path d="M41.5228 6.37278C40.5029 5.30351 39.2919 4.45529 37.9591 3.87658C36.6262 3.29786 35.1976 3 33.7549 3C32.3121 3 30.8835 3.29786 29.5507 3.87658C28.2178 4.45529 27.0069 5.30351 25.9869 6.37278L23.8702 8.59085L21.7535 6.37278C19.6933 4.21394 16.8991 3.00112 13.9855 3.00112C11.072 3.00112 8.27778 4.21394 6.21759 6.37278C4.1574 8.53162 3 11.4596 3 14.5127C3 17.5657 4.1574 20.4938 6.21759 22.6526L8.33431 24.8707L23.8702 41.1505L39.4061 24.8707L41.5228 22.6526C42.5432 21.5838 43.3527 20.3149 43.905 18.9182C44.4572 17.5215 44.7415 16.0245 44.7415 14.5127C44.7415 13.0009 44.4572 11.5039 43.905 10.1072C43.3527 8.71051 42.5432 7.44155 41.5228 6.37278Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+                    {% endif %}
+
                 </button>
                 <span>{{ post.likes.all.count }}</span>
             </form>
@@ -105,19 +115,29 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
                 <button class="like_button">
+                    
+                    {% if request.user in post.dislikes.all %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51" fill="yellow">
+                        <path d="M25.5 48C37.9264 48 48 37.9264 48 25.5C48 13.0736 37.9264 3 25.5 3C13.0736 3 3 13.0736 3 25.5C3 37.9264 13.0736 48 25.5 48Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M34.5 34.5C34.5 34.5 31.125 30 25.5 30C19.875 30 16.5 34.5 16.5 34.5" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18.75 18.75H18.7725" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M32.25 18.75H32.2725" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {% else %}
                     <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51" fill="none">
                         <path d="M25.5 48C37.9264 48 48 37.9264 48 25.5C48 13.0736 37.9264 3 25.5 3C13.0736 3 3 13.0736 3 25.5C3 37.9264 13.0736 48 25.5 48Z" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M34.5 34.5C34.5 34.5 31.125 30 25.5 30C19.875 30 16.5 34.5 16.5 34.5" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M18.75 18.75H18.7725" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M32.25 18.75H32.2725" stroke="black" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
+                    {% endif %}
                 </button>
                 <span>{{ post.dislikes.all.count }}</span>
             </form>
         </div>
 
         <div class="custom_input">
-            <a href="{% url 'post-detail' post.pk %}"> Xem thêm... </a>
+            <a href="{% url 'post-detail' post.pk %}" style="font-size: 16px"> Xem thêm... </a>
         </div>
     </div>
 

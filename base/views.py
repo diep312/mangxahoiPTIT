@@ -52,6 +52,9 @@ def registerPage(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
+            UserAdditionalInfo.objects.create(
+                user = user
+            )
             login(request, user)
             return redirect('home')
         else:
@@ -113,6 +116,7 @@ def friendspage(request, pk):
 @login_required(login_url='login')
 def editprofile(request, pk):
     cur_user = User.objects.get(id=pk)
+    user_info = UserAdditionalInfo.objects.get(user_id=pk)
     page = 'edit'
     form = UpdateUserForm(request.POST, request.FILES)
     
@@ -126,10 +130,11 @@ def editprofile(request, pk):
                 newinfo.avt = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
             newinfo.save()
             messages.success(request, 'Cập nhật thành công')
-            return redirect('profile')
+            return redirect('home')
 
     context ={
         'user': cur_user,
+        'user_info': user_info,
         'page': page,
         'form': form
     }
@@ -167,7 +172,7 @@ class PostDetailView(LoginRequiredMixin, View):
 
 class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['body']
+    fields = ['body', 'img']
     template_name = 'base/post_edit.html'
 
     def get_success_url(self):
@@ -179,8 +184,8 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    template_name = 'social/post_delete.html'
-    success_url = reverse_lazy('post-list')
+    template_name = 'base/post_delete.html'
+    success_url = reverse_lazy('home')
     def test_func(self):
         post = self.get_object()
         return self.request.user == post.author

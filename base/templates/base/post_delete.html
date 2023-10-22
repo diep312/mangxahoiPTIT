@@ -1,25 +1,55 @@
-{% extends 'landing/base.html' %}
-{% load crispy_forms_tags %}
+{% extends 'main.html' %}
 
 {% block content %}
+<style>
+    .container{
+        width: 100%;
+        height: 100%; 
+        background-color: rgba(0,0,0,0.7); 
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: grid; 
+        place-items: center;
+    }
+
+    .box{
+        margin: auto;
+        max-width: 400px;
+        background-color: #FFE8A3;
+        border: 3px solid #C17D7D;
+        border-radius: 5px;
+        padding: 10px 30px; 
+    }
+    
+    button{
+        display: inline-block;
+        font-size: 24px; 
+        background: #F0B724;
+        border: 3px solid black;
+        padding: 10px 15px;
+        border-radius: 15px;
+    }
+</style>
+
 <div class="container">
-    <div class="row mt-5">
+    <div class="box">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-5 col-sm-12">
+                <h1>Bạn có chắc không?</h1>
+                <p style="font-size: 24px; font-weight: 300">Nội dung đã xóa đi sẽ không thể xem lại.</p>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <div style="display: flex; justify-content: flex-end;">
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                </div>
+            </form>
+        </div>
+        </div>
         <div class="col-md-3 col-sm-6">
             <a href="{% url 'post-detail' object.pk %}" class="btn btn-light">Back to Feed</a>
         </div>
-    </div>
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-5 col-sm-12">
-            <h5>Bạn có chắc không?</h5>
-            <p>Nội dung đã xóa đi sẽ không thể xem lại.</p>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form }}
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-danger">Xóa</button>
-            </div>
-        </form>
-    </div>
     </div>
 </div>
 {% endblock content %}

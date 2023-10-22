@@ -10,8 +10,9 @@ class PostForm(forms.ModelForm):
         label = '',
         widget = forms.Textarea(attrs={
             'rows':'3',
-            'placeholder': 'Say something...',
-            'type': 'text'
+            'placeholder': 'Hãy chia sẻ một thứ gì đó...',
+            'type': 'text',
+            'class': 'custom-input'
         })
     )
     class Meta:
@@ -40,5 +41,5 @@ class UpdateUserForm(forms.ModelForm):
             'dob': DateInput(attrs={'type' : 'date'}), 
             'gender': forms.Select(choices=Choices),
             'location': forms.TextInput(attrs = {'placeholder': 'Nhập vị trí...'}),
-            'description': forms.Textarea(attrs = {'placeholder': 'Nhập mô tả...'}),
+            'description': forms.Textarea(attrs = {'placeholder': 'Nhập mô tả...', 'class': 'custom-textarea'}),
         }

@@ -29,7 +29,7 @@
 
     .box_container .info{
         display: inline-block;
-        margin-left: 30px;
+        padding-top: 10px;
         vertical-align: top;
     }
 
@@ -43,7 +43,7 @@
     }
 
     .leftColumn{
-       flex-basis: 50%;
+       flex-basis: 55%;
        align-self: flex-start; 
     }
 
@@ -51,7 +51,7 @@
         align-self: flex-start;
         flex-basis: 30%;
         position: sticky;
-        top: 30px;
+        top: 120px;
     }
 
     .avt{
@@ -67,22 +67,36 @@
         width: 100%;
         height: 100%; 
         background-color: rgba(0,0,0,0.7); 
-        position: absolute; 
+        position: absolute;
         top: 0;
+        left: 0;
+        display: grid; 
+        place-items: center;
+    }
 
-        justify-items: center;
-        align-items: center;
+    .custom-input{
+        background-color: white;
+        border: 3px solid black; 
+        border-radius: 10px;
+        width: 100%;
+        min-height: 200px;
     }
 
     .editbox{
         max-width: 420px;
         background-color: #FFE8A3;
         border: 3px solid #C17D7D;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 10px 30px; 
     }
-
     
+    .editbox button{
+        font-size: 24px; 
+        background: #F0B724;
+        border: 3px solid black;
+        padding: 10px 15px;
+        border-radius: 15px;
+    }
 </style>
 
 <div class="container">
@@ -99,11 +113,13 @@
         <div class="box_container">
             <h1 style="padding-bottom: 20px;"> Gần bạn </h1>
             {% for user in user_info %}
-            <div>
-                <div class="info">
-                    <a href="{% url 'profile' user.id %}"> {{ user.username }} </a>
+                {% if request.user != user %}
+                <div>
+                    <div class="info">
+                        <a href="{% url 'profile' user.id %}" style="text-align: left"> {{ user.username }} </a>
+                    </div>
                 </div>
-            </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -111,20 +127,32 @@
 </div>
 
 {% if page == 'post' %}
-<div class="editprofile-container">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="editbox">
-            <a href="{% url 'home' %}" style="display:flex; float: right;"> x </a>    
+<script>
+    window.onscroll = function(){
+        window.scrollTo(0, 0);
+    }
+</script>
+
+<div class="editprofile-container" name="edit-enable">
+    <div class="editbox">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <a href="{% url 'home' %}" style="display: flex; float: right;"> x </a>    
             <div>
-                <h3> Post </h3>  
-                {{ form.as_p }}
+                <h1> Đăng bài </h1>  
+                {{ form.body }}
+                <div>
+                    <span> Thêm ảnh: </span>
+                    {{ form.img }}
+                </div>
+            </div>
+            <div style="padding-top: 20px; display: flex; justify-content: flex-end;">
                 <button type="submit"> Đăng bài </button>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 {% endif %}
-
 
 {% endblock content %}
